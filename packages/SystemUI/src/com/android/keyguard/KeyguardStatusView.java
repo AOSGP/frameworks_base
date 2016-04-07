@@ -72,6 +72,11 @@ public class KeyguardStatusView extends GridLayout {
     private int mDateTextColor;
     private int mAlarmTextColor;
 
+    private TextView mAmbientDisplayBatteryView;
+    private final int mWarningColor = 0xfff4511e;
+    private int mIconColor;
+    private int mPrimaryTextColor;
+
     private KeyguardUpdateMonitorCallback mInfoCallback = new KeyguardUpdateMonitorCallback() {
 
         @Override
@@ -159,7 +164,8 @@ public class KeyguardStatusView extends GridLayout {
         mOwnerInfo = findViewById(R.id.owner_info);
         mBatteryDoze = findViewById(R.id.battery_doze);
         mKeyguardStatusArea = findViewById(R.id.keyguard_status_area);
-        mVisibleInDoze = new View[]{mBatteryDoze, mClockView, mKeyguardStatusArea};
+        mAmbientDisplayBatteryView = (TextView) findViewById(R.id.ambient_display_battery_view);
+        mVisibleInDoze = new View[]{mAmbientDisplayBatteryView, mClockView, mKeyguardStatusArea};
         mTextColor = mClockView.getCurrentTextColor();
         mDateTextColor = mDateView.getCurrentTextColor();
         mAlarmTextColor = mAlarmStatusView.getCurrentTextColor();
