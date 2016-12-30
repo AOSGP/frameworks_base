@@ -74,6 +74,7 @@ import android.util.MergedConfiguration;
 import android.util.Slog;
 import android.util.TimeUtils;
 import android.util.TypedValue;
+import android.util.BoostFramework;
 import android.view.Surface.OutOfResourcesException;
 import android.view.View.AttachInfo;
 import android.view.View.FocusDirection;
@@ -491,6 +492,12 @@ public final class ViewRootImpl implements ViewParent,
     }
 
     private String mTag = TAG;
+    boolean mHaveMoveEvent = false;
+    boolean mIsPerfLockAcquired = false;
+    boolean mIsPreFlingBoostEnabled = false;
+    BoostFramework mPerf = null;
+    int mPreFlingBoostTimeOut = 0;
+    int mPreFlingBoostParamVal[];
 
     public ViewRootImpl(Context context, Display display) {
         mContext = context;
@@ -534,6 +541,15 @@ public final class ViewRootImpl implements ViewParent,
             sCompatibilityDone = true;
         }
 
+        mIsPreFlingBoostEnabled = context.getResources().getBoolean(
+                com.android.internal.R.bool.config_enableCpuBoostForPreFling);
+        if (mIsPreFlingBoostEnabled) {
+            mPerf = new BoostFramework();
+            mPreFlingBoostTimeOut = context.getResources().getInteger(
+                    com.android.internal.R.integer.preflingboost_timeout_param);
+            mPreFlingBoostParamVal = context.getResources().getIntArray(
+                    com.android.internal.R.array.preflingboost_param_value);
+        }
         loadSystemProperties();
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -2898,6 +2914,10 @@ public final class ViewRootImpl implements ViewParent,
         scrollToRectOrFocus(null, false);
 
         if (mAttachInfo.mViewScrollChanged) {
+            if (mHaveMoveEvent && !mIsPerfLockAcquired && mPerf != null) {
+                mIsPerfLockAcquired = true;
+                mPerf.perfLockAcquire(mPreFlingBoostTimeOut, mPreFlingBoostParamVal);
+            }
             mAttachInfo.mViewScrollChanged = false;
             mAttachInfo.mTreeObserver.dispatchOnScrollChanged();
         }
