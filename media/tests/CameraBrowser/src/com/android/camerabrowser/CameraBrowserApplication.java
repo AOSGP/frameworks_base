@@ -17,6 +17,11 @@
 package com.android.camerabrowser;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.os.PowerManager;
+import android.os.SystemClock;
 
 public class CameraBrowserApplication extends Application {
 
@@ -35,5 +40,12 @@ public class CameraBrowserApplication extends Application {
 
     public MtpClient getMtpClient() {
         return mClient;
+    }
+
+    public static void switchScreenOff(Context ctx) {
+        PowerManager pm = (PowerManager) ctx.getSystemService(Context.POWER_SERVICE);
+        if (pm!= null) {
+            pm.goToSleep(SystemClock.uptimeMillis());
+        }
     }
 }
