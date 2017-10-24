@@ -2057,4 +2057,7 @@
     <string name="touch_filtered_warning">Because an app is obscuring a permission request, Settings
         can’t verify your response.</string>
 
+    <string name="global_action_restart_soft">Soft Reboot</string>
+    <string name="global_action_restart_systemui">Restart SystemUI</string>
+
 </resources>
