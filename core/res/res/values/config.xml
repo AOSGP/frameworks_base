@@ -2374,7 +2374,6 @@
         <item>power</item>
         <item>restart</item>
         <item>bugreport</item>
-        <item>onthego</item>
         <item>users</item>
     </string-array>
 
