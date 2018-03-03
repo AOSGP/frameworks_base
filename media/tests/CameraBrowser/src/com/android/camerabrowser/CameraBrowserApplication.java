@@ -18,14 +18,10 @@ package com.android.camerabrowser;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.os.PowerManager;
-import android.os.RemoteException;
 import android.os.SystemClock;
-import android.view.IWindowManager;
-import android.view.WindowManagerGlobal;
 
 public class CameraBrowserApplication extends Application {
 
@@ -50,15 +46,6 @@ public class CameraBrowserApplication extends Application {
         PowerManager pm = (PowerManager) ctx.getSystemService(Context.POWER_SERVICE);
         if (pm!= null) {
             pm.goToSleep(SystemClock.uptimeMillis());
-        }
-    }
-
-    public static void takeScreenshot(boolean full) {
-        IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
-        try {
-            wm.sendCustomAction(new Intent(full? INTENT_SCREENSHOT : INTENT_REGION_SCREENSHOT));
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }
 }
