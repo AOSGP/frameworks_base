@@ -52,6 +52,8 @@ import com.android.systemui.statusbar.policy.UserInfoController;
 import com.android.systemui.util.wakelock.SettableWakeLock;
 import com.android.systemui.util.wakelock.WakeLock;
 
+import java.text.NumberFormat;
+
 /**
  * Controls the indications and error messages shown on the Keyguard
  */
@@ -88,6 +90,7 @@ public class KeyguardIndicationController {
     private int mChargingSpeed;
     private int mChargingWattage;
     private String mMessageToShowOnScreenOn;
+    private int mLevel;
 
     private KeyguardUpdateMonitorCallback mUpdateMonitorCallback;
 
@@ -427,6 +430,7 @@ public class KeyguardIndicationController {
             mPowerCharged = status.isCharged();
             mChargingWattage = status.maxChargingWattage;
             mChargingSpeed = status.getChargingSpeed(mSlowThreshold, mFastThreshold);
+            mLevel  = status.level;
             updateIndication();
             if (mDozing) {
                 if (!wasPluggedIn && mPowerPluggedIn) {
