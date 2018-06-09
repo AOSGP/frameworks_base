@@ -202,4 +202,10 @@
     <!-- FloatingToolbar -->
     <color name="floating_popup_divider_dark">#2F2F2F</color>
     <color name="floating_popup_divider_light">#E9E9E9</color>
+
+	<color name="dot_qs_active">#ffffff</color>
+	<color name="dot_qs_inactive">#595959</color>
+	<color name="dot_qs_unavailable">#706f6f</color>
+	<color name="dot_qs_circle_active">?android:attr/colorAccent</color>
+	<color name="dot_qs_circle_inactive">#dbdbdb</color>
 </resources>
