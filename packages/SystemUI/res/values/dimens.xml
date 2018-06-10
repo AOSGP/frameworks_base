@@ -858,6 +858,6 @@
     <!-- Home button padding for sizing -->
     <dimen name="home_padding">15dp</dimen>
 
-    <dimen name="qs_panel_top_margin">56dp</dimen>
+    <dimen name="qs_panel_top_margin">40dp</dimen>
 
 </resources>
