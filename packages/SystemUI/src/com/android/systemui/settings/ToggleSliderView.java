@@ -70,7 +70,6 @@ public class ToggleSliderView extends RelativeLayout implements ToggleSlider {
         mLabel.setText(a.getString(R.styleable.ToggleSliderView_text));
 
         mSlider.setAccessibilityLabel(getContentDescription().toString());
-
         a.recycle();
     }
 
