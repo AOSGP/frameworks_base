@@ -4113,6 +4113,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(LOCK_TO_APP_ENABLED);
             PRIVATE_SETTINGS.add(EGG_MODE);
             PRIVATE_SETTINGS.add(SHOW_BATTERY_PERCENT);
+            PRIVATE_SETTINGS.add(USE_BOTTOM_GESTURE_NAVIGATION);
         }
 
 	/**
@@ -5372,6 +5373,10 @@ public final class Settings {
          */
         public static final String UNKNOWN_SOURCES_DEFAULT_REVERSED =
                 "unknown_sources_default_reversed";
+        /**
+         * @hide
+         */
+        public static final String USE_BOTTOM_GESTURE_NAVIGATION = "use_bottom_gesture_navigation";
 
         /**
          * Comma-separated list of location providers that activities may access. Do not rely on
