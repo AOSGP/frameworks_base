@@ -18,6 +18,8 @@ package com.android.systemui.qs;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.database.ContentObserver;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -38,8 +40,10 @@ public class QSContainerImpl extends FrameLayout {
     protected View mHeader;
     protected float mQsExpansion;
     private QSCustomizer mQSCustomizer;
-    private View mQSFooter;
+    protected View mHeadIcons;
     private float mFullElevation;
+    private Drawable mQsTopBackGround;
+
 
     public QSContainerImpl(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -52,11 +56,15 @@ public class QSContainerImpl extends FrameLayout {
         mQSDetail = findViewById(R.id.qs_detail);
         mHeader = findViewById(R.id.header);
         mQSCustomizer = findViewById(R.id.qs_customize);
-        mQSFooter = findViewById(R.id.qs_footer);
+		mHeadIcons = findViewById(R.id.qs_header_system_icons);
         mFullElevation = mQSPanel.getElevation();
+		mQsTopBackGround = getContext().getDrawable(R.drawable.qs_background_top);
 
         setClickable(true);
         setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
+		if (mQsTopBackGround != null) {
+			mHeadIcons.setBackground(mQsTopBackGround);
+	}
     }
 
     @Override
@@ -109,7 +117,7 @@ public class QSContainerImpl extends FrameLayout {
         setBottom(getTop() + height);
         mQSDetail.setBottom(getTop() + height);
         // Pin QS Footer to the bottom of the panel.
-        mQSFooter.setTranslationY(height - mQSFooter.getHeight());
+        //mQSFooter.setTranslationY(height - mQSFooter.getHeight());
     }
 
     protected int calculateContainerHeight() {

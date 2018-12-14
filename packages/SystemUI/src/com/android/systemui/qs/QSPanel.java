@@ -22,8 +22,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.ContentObserver;
+import android.graphics.drawable.Drawable;
 import android.metrics.LogMaker;
 import android.os.Handler;
+import android.os.UserHandle;
 import android.os.Message;
 import android.service.quicksettings.Tile;
 import android.util.AttributeSet;
@@ -31,6 +34,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.provider.Settings;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -85,8 +89,15 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
     private BrightnessMirrorController mBrightnessMirrorController;
     private View mDivider;
 
+	private Drawable mQsPanelBackGround;
+	private int mQsBackGroundAlpha;
+	private View mQSFooter;
+
     public QSPanel(Context context) {
         this(context, null);
+		Handler mHandler = new Handler();
+        SettingsObserver settingsObserver = new SettingsObserver(mHandler);
+        settingsObserver.observe();
     }
 
     public QSPanel(Context context, AttributeSet attrs) {
@@ -113,11 +124,43 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         mFooter = new QSSecurityFooter(this, context);
         addView(mFooter.getView());
 
+		mQSFooter = LayoutInflater.from(context).inflate(
+                R.layout.qs_footer_impl, this, false);
+		addView(mQSFooter);
+ 		LinearLayout mSpacer = new LinearLayout(context);
+		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, 8);
+		mSpacer.setLayoutParams(lp);
+		addView(mSpacer);
+
         updateResources();
 
         mBrightnessController = new BrightnessController(getContext(),
                 findViewById(R.id.brightness_icon),
                 findViewById(R.id.brightness_slider));
+
+		mQsPanelBackGround = context.getDrawable(R.drawable.qs_background_primary);
+		setBackground(mQsPanelBackGround);
+    }
+	
+	private class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+         void observe() {
+            getContext().getContentResolver().registerContentObserver(Settings.System
+                    .getUriFor(Settings.System.QS_PANEL_BG_ALPHA), false,
+                    this, UserHandle.USER_ALL);
+        }
+         @Override
+        public void onChange(boolean selfChange) {
+            updateAlpha();
+        }
+    }
+     private void updateAlpha() {
+        mQsBackGroundAlpha = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.QS_PANEL_BG_ALPHA, 255,
+                UserHandle.USER_CURRENT);
+		mQsPanelBackGround.setAlpha(mQsBackGroundAlpha);
     }
 
     protected void addDivider() {
