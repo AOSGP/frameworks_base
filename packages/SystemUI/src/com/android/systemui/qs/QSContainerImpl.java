@@ -22,6 +22,9 @@ import android.database.ContentObserver;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.os.Handler;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -125,7 +128,7 @@ public class QSContainerImpl extends FrameLayout {
 
     private void updateAlpha() {
         mQsBackGroundAlpha = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.QS_PANEL_BG_ALPHA, 255,
+                Settings.System.QS_PANEL_BG_ALPHA, 0,
                 UserHandle.USER_CURRENT);
 		Drawable bg = mBackground.getBackground();
 		bg.setAlpha(mQsBackGroundAlpha);

@@ -33,7 +33,6 @@ import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.android.settingslib.Utils;
-import com.android.systemui.BatteryMeterView;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.R.id;
@@ -57,8 +56,7 @@ public class QuickStatusBarHeader extends RelativeLayout {
     protected QuickQSPanel mHeaderQsPanel;
     protected QSTileHost mHost;
 
-    private BatteryMeterView mBatteryView;
-	
+
 	private View mDate;
 
     public QuickStatusBarHeader(Context context, AttributeSet attrs) {
@@ -81,8 +79,6 @@ public class QuickStatusBarHeader extends RelativeLayout {
         int colorForeground = Color.parseColor("#ffffff");
         float intensity = colorForeground == Color.WHITE ? 0 : 1;
         Rect tintArea = new Rect(0, 0, 0, 0);
-        //mBatteryView = findViewById(R.id.battery);
-        //mBatteryView.setIsQuickSbHeaderOrKeyguard(true);
 		
         mDate = findViewById(R.id.date);
 	
