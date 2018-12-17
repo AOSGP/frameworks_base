@@ -1183,7 +1183,7 @@
     <bool name="config_skipScreenOnBrightnessRamp">false</bool>
 
     <!-- Allow automatic adjusting of the screen brightness while dozing in low power state. -->
-    <bool name="config_allowAutoBrightnessWhileDozing">false</bool>
+    <bool name="config_allowAutoBrightnessWhileDozing">true</bool>
 
     <!-- Stability requirements in milliseconds for accepting a new brightness level.  This is used
          for debouncing the light sensor.  Different constants are used to debounce the light sensor
@@ -1920,7 +1920,7 @@
     <bool name="config_dozeAfterScreenOff">false</bool>
 
     <!-- Doze: should the TYPE_PICK_UP_GESTURE sensor be used as a pulse signal. -->
-    <bool name="config_dozePulsePickup">false</bool>
+    <bool name="config_dozePulsePickup">true</bool>
 
     <!-- Type of the double tap sensor. Empty if double tap is not supported. -->
     <string name="config_dozeDoubleTapSensorType" translatable="false"></string>
@@ -1931,7 +1931,7 @@
     <!-- Control whether the always on display mode is available. This should only be enabled on
          devices where the display has be tuned to be power efficient in DOZE and/or DOZE_SUSPEND
          states. -->
-    <bool name="config_dozeAlwaysOnDisplayAvailable">false</bool>
+    <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
 
     <!-- Whether the display blanks itself when transitioning from a doze to a non-doze state -->
     <bool name="config_displayBlanksAfterDoze">false</bool>
@@ -3089,6 +3089,6 @@
     <integer name="config_stableDeviceDisplayHeight">-1</integer>
 
     <!-- Full screen aspect ratio -->
-    <bool name="config_haveHigherAspectRatioScreen">false</bool>
+    <bool name="config_haveHigherAspectRatioScreen">true</bool>
     <item name="config_screenAspectRatio" format="float" type="dimen">2.1</item>
 </resources>
