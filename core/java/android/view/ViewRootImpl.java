@@ -155,6 +155,8 @@ public final class ViewRootImpl implements ViewParent,
     private int mScreenWidth = -1;
     private int mOneThirdPart = -1;
     private boolean mIsKeyguard = false;
+    boolean mHaveMoveEvent = false;
+    boolean mIsPerfLockAcquired = false;
 
     /**
      * Set to false if we do not want to use the multi threaded renderer. Note that by disabling
