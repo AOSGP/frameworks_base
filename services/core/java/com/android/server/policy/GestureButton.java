@@ -40,6 +40,7 @@ import android.view.WindowManagerPolicy.WindowState;
 import android.view.inputmethod.InputMethodManagerInternal;
 
 import com.android.internal.util.aospextended.AEXUtils;
+
 import com.android.server.LocalServices;
 import com.android.server.statusbar.StatusBarManagerInternal;
 
